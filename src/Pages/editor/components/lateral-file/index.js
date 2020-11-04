@@ -10,9 +10,12 @@ export default class LateralFile extends Component {
   }
 
   render() {
-    const { documentName, timeElapsed, selected } = this.props;
+    const { documentName, timeElapsed, selected, onFileSelected } = this.props;
     return (
-        <div className={`lateral-item-container ${selected ? 'selected-item' : ''}`}>
+        <div 
+          className={`lateral-item-container ${selected ? 'selected-item' : ''}`}
+          onClick={onFileSelected}
+        >
             <div className="icon-lateral-list">
             <DescriptionIcon/>
             </div>

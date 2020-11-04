@@ -12,7 +12,7 @@ export default class LateralMenu extends Component {
   }
 
   onClickFileSelected(item){
-    console.log("fileSelected");
+    this.props.onFileSelected(item);
   }
 
   render() {
@@ -31,7 +31,7 @@ export default class LateralMenu extends Component {
                     documentName={item.documentTitle}
                     timeElapsed={item.timeElapsed}
                     selected={item.selected}
-                    onClick={() => this.onClickFileSelected(item)}
+                    onFileSelected={() => this.onClickFileSelected(item)}
                 />
             ))}
         </div>
