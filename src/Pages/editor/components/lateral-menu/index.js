@@ -27,11 +27,11 @@ export default class LateralMenu extends Component {
             </div>
             {items.map((item, index) => (
                 <LateralFile
-                    key={(item.documentTitle + index) || index}
-                    documentName={item.documentTitle}
-                    timeElapsed={item.timeElapsed}
+                    key={item.createdAt}
+                    documentName={item.nombre}
+                    timeElapsed={item.updatedAt}
                     selected={item.selected}
-                    onFileSelected={() => this.onClickFileSelected(item)}
+                    onFileSelected={() => this.onClickFileSelected(item.id)}
                 />
             ))}
         </div>

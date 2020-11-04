@@ -44,8 +44,8 @@ export default class Editor extends Component {
   componentDidMount() {
     fetch('/api/documents')
     .then((res) => res.json())
-    .then((repos) => {
-      this.setState({ loading: false, items });
+    .then((documentos) => {
+      this.setState({ loading: false, items:documentos });
     })
     .catch((err) => {
       console.log(err);
@@ -169,8 +169,6 @@ export default class Editor extends Component {
   }
 
   render() {
-    
-
     return (
       <div className="main-container">
         {this.state.loading && <LinearProgress />}
@@ -178,7 +176,7 @@ export default class Editor extends Component {
           <div className="column-xs" >
             <LateralMenu 
               items={this.state.items} 
-              onFileSelected={this.onFileSelected} 
+              onFileSelected={this.onFileSelected}
             />
           </div>
           <div className="column-m" >
