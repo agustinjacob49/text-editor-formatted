@@ -45,6 +45,7 @@ export default class Editor extends Component {
     fetch('/api/documents')
     .then((res) => res.json())
     .then((documentos) => {
+      documentos.map( (d) => (d.selected = false));
       this.setState({ loading: false, items:documentos });
     })
     .catch((err) => {
@@ -54,15 +55,19 @@ export default class Editor extends Component {
 
   onFileSelected(item) {
     const { items } = this.state;
+    let indexItem = 0;
     items.map((i, k) => {
       if (i.selected){
         i.selected = false;
       }
-      if(i.id === item.id){
+      if(i.id === item){
+        indexItem = k;
         i.selected = true;
       }
       return i;
     });
+
+    this.handleChangeText(items[indexItem].lines);
     this.setState({items});
   }
 
