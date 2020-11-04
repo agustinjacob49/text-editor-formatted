@@ -3,22 +3,22 @@
  */
 import React, { Component } from 'react';
 import DescriptionIcon from '@material-ui/icons/Description';
-
+import './style.css';
 export default class LateralFile extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { DocumentName, TimeElapsed } = this.props;
+    const { documentName, timeElapsed, selected } = this.props;
     return (
-        <div className="lateral-item-container">
+        <div className={`lateral-item-container ${selected ? 'selected-item' : ''}`}>
             <div className="icon-lateral-list">
             <DescriptionIcon/>
             </div>
             <div className="text-lateral-list">
-            <p className="title-document">{DocumentName}</p>
-            <p className="time-document">{TimeElapsed}</p>
+            <p className="title-document">{documentName}</p>
+            <p className="time-document">{timeElapsed}</p>
             </div>
         </div>
     );

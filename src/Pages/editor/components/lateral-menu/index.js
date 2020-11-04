@@ -7,9 +7,16 @@ import LateralFile from './../lateral-file/index';
 export default class LateralMenu extends Component {
   constructor(props) {
     super(props);
+    this.onClickFileSelected = this.onClickFileSelected.bind(this)
+
+  }
+
+  onClickFileSelected(item){
+    console.log("fileSelected");
   }
 
   render() {
+    const { items } = this.props;
 
     return (
         <div className="lateral-list">
@@ -18,10 +25,15 @@ export default class LateralMenu extends Component {
                     <p>Markdown Editor</p>
                 </div>
             </div>
-            <LateralFile DocumentName="Document 1" TimeElapsed="3 days Ago"/>
-            <LateralFile DocumentName="Document 2" TimeElapsed="6 days Ago"/>
-            <LateralFile DocumentName="Document 3" TimeElapsed="10 days Ago"/>
-            <LateralFile DocumentName="Document 4" TimeElapsed="12 days Ago"/>
+            {items.map((item, index) => (
+                <LateralFile
+                    key={(item.documentTitle + index) || index}
+                    documentName={item.documentTitle}
+                    timeElapsed={item.timeElapsed}
+                    selected={item.selected}
+                    onClick={() => this.onClickFileSelected(item)}
+                />
+            ))}
         </div>
     );
   }

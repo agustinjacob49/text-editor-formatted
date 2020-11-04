@@ -1,0 +1,11 @@
+.selected-item{
+    background-color: #9c9c9c;
+}
+
+.selected-item .text-lateral-list .title-document{
+    color: white;
+}
+
+.selected-item .text-lateral-list .time-document{
+    color: #d6d6d6;
+}
