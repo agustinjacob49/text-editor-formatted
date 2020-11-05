@@ -26,15 +26,11 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    console.log("findall");
-  
     Document.find({})
       .then(data => {
-        console.log("data");
         res.send(data);
       })
       .catch(err => {
-        console.log("findall");
         res.status(500).send({
           message:
             err.message || "Algo falló"
@@ -53,7 +49,6 @@ exports.findOne = (req, res) => {
         }
       })
       .catch(err => {
-        console.log("error");
         res.status(500).send({ message: "Algo falló" });
       });
 };

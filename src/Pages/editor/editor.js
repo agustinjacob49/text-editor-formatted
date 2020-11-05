@@ -175,7 +175,6 @@ export default class Editor extends Component {
   }
 
   deleteItem(id){
-    console.log("delete", id);
     fetch(`/api/documents/${id}`, {
       method: 'DELETE'
     })
