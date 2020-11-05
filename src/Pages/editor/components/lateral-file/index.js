@@ -6,10 +6,6 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import Button from '@material-ui/core/Button';
 import './style.css';
 export default class LateralFile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { documentName, timeElapsed, selected, onFileSelected, onClickDelete } = this.props;
     return (

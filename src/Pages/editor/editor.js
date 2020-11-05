@@ -120,7 +120,6 @@ export default class Editor extends Component {
   makeCode(lines, index){
     const { elements } = this.state;
     let stop = 0;
-    let textFinal = '';
     let counter = 0;
     let textsFinal = [];
     lines.forEach((l, k) => {
@@ -131,7 +130,7 @@ export default class Editor extends Component {
         }
       }
     });
-    if(stop != 0){
+    if(stop !== 0){
       for (var i = index; i < stop; i++) {
         let line = lines[i];
         if ((line[0] !== '`' && line[1] !== '`' && line[2] !== '`')){
