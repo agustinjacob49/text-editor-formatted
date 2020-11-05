@@ -121,13 +121,11 @@ pre {
     word-wrap: break-word;
 }
 
-.button-save {
-    margin-top: 2% !important;
-    margin-left: 6% !important;
-    margin-bottom: 2% !important;
+.button {
+    margin: 6px !important;
 }
 
 .text-box{
-    width: 70%;
+    width: 50%;
     height: 40px;
 }

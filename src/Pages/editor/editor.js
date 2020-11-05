@@ -24,6 +24,7 @@ export default class Editor extends Component {
     this.saveItem = this.saveItem.bind(this);
     this.fetchDocuments = this.fetchDocuments.bind(this);
     this.updateItem = this.updateItem.bind(this);
+    this.newDocument = this.newDocument.bind(this);
   }
 
   componentDidMount() {
@@ -220,6 +221,12 @@ export default class Editor extends Component {
       console.log(err);
     });
   }
+
+  newDocument(){
+    document.getElementById('title-document').value = '';
+    this.setState({item: { lines : []}});
+  }
+
   render() {
     return (
       <div className="main-container">
@@ -236,9 +243,16 @@ export default class Editor extends Component {
             <div>
             <input type="text"  id="title-document" name="name" className="text-box" placeholder="Title"/>
             <Button 
+              variant="outlined"
+              className="button"
+              onClick={this.newDocument}
+              >
+              New
+            </Button>
+            <Button 
               color="primary" 
               variant="contained"
-              className="button-save"
+              className="button"
               onClick={this.saveItem}
               >
               Save
