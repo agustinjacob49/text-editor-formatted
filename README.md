@@ -1,6 +1,6 @@
 # text-editor-formatted
 
-## Demo en Heroku!: 
+### Demo en Heroku!: 
 https://text-editor-ajacobsen.herokuapp.com/
 
 
@@ -20,20 +20,12 @@ Para el FE : React + Material UI
 
 En la raiz del proyecto.. ejecutar npm install.
 ### `npm install`.
-Esperar ...
-### `cd api`
-### `npm install`
 
 Esto va a instalar los modulos de node para el FE y el BE
 
-Luego en dos consolas separadas ejecutar :  <br>
 En la raiz del proyecto : 
 ### `npm start`
  <br>
-
-En el directorio ./api : 
-### `npm run start`
-
 
 ### Ejemplo : 
 ![Captura de pantalla](https://raw.githubusercontent.com/agustinjacob49/text-editor-formatted/main/src/assets/screenshot.png)
