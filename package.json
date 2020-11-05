@@ -2,23 +2,29 @@
   "name": "text-editor-formatted",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080/",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.1.10",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-spinners": "^0.9.0",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "mongoose": "^5.8.10"
   },
   "scripts": {
-    "start": "react-scripts start node /api/server.js",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js",
+    "start-dev-r": "react-scripts start node /api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
