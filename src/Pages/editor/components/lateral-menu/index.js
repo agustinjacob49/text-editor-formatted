@@ -8,11 +8,15 @@ export default class LateralMenu extends Component {
   constructor(props) {
     super(props);
     this.onClickFileSelected = this.onClickFileSelected.bind(this)
-
+    this.deleteItem = this.deleteItem.bind(this)
   }
 
   onClickFileSelected(item){
     this.props.onFileSelected(item);
+  }
+
+  deleteItem(item){
+    this.props.onClickDelete(item);
   }
 
   render() {
@@ -32,6 +36,7 @@ export default class LateralMenu extends Component {
                     timeElapsed={item.updatedAt}
                     selected={item.selected}
                     onFileSelected={() => this.onClickFileSelected(item.id)}
+                    onClickDelete={() => this.deleteItem(item.id)}
                 />
             ))}
         </div>

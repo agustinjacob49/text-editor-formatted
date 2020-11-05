@@ -9,3 +9,7 @@
 .selected-item .text-lateral-list .time-document{
     color: #d6d6d6;
 }
+
+.button-delete{
+    margin-top:3px;
+}

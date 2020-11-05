@@ -3,27 +3,7 @@ import './style.css';
 import LateralMenu from './components/lateral-menu';
 import TextEditor from './components/text-editor';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
-const items = [
-  {
-      id: 1,
-      documentTitle: 'Documento 1',
-      timeElapsed: '3 days',
-      selected: true
-  },
-  {
-      id: 2,
-      documentTitle: 'Documento 2',
-      timeElapsed: '3 days',
-      selected: false
-  },
-  {
-      id: 3,
-      documentTitle: 'Documento 3',
-      timeElapsed: '3 days',
-      selected: false
-  }
-];
+import Button from '@material-ui/core/Button';
 
 export default class Editor extends Component {
   constructor(props) {
@@ -32,25 +12,21 @@ export default class Editor extends Component {
     this.state = {
       items : [],
       elements : [],
-      loading: true
+      loading: true,
+      item : {},
     };
     this.onFileSelected = this.onFileSelected.bind(this);
     this.makeTittle = this.makeTittle.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);
     this.makeP = this.makeP.bind(this);
     this.makeCode = this.makeCode.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.saveItem = this.saveItem.bind(this);
+    this.fetchDocuments = this.fetchDocuments.bind(this);
   }
 
   componentDidMount() {
-    fetch('/api/documents')
-    .then((res) => res.json())
-    .then((documentos) => {
-      documentos.map( (d) => (d.selected = false));
-      this.setState({ loading: false, items:documentos });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this.fetchDocuments();
   }
 
   onFileSelected(item) {
@@ -72,7 +48,12 @@ export default class Editor extends Component {
   }
 
   handleChangeText(lines){
-    this.setState({elements : []}, 
+    let itemToSave = {
+      nombre: "Testing",
+      lines,
+    };
+
+    this.setState({elements : [], item: itemToSave}, 
       () => {
         window.setTimeout(() => {
           let i = 0;
@@ -173,6 +154,49 @@ export default class Editor extends Component {
     return joinArray;
   }
 
+  fetchDocuments(){
+    fetch('/api/documents')
+    .then((res) => res.json())
+    .then((documentos) => {
+      documentos.map( (d) => (d.selected = false));
+      this.setState({ loading: false, items:documentos, item:{} });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  deleteItem(id){
+    console.log("delete", id);
+    fetch(`/api/documents/${id}`, {
+      method: 'DELETE'
+    })
+    .then((res) => res.json())
+    .then((documentos) => {
+      if(documentos.message !== 'Parece que no existe ese documento'){
+        this.fetchDocuments();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  saveItem(){
+    fetch(`/api/documents/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.item)
+    })
+    .then((res) => res.json())
+    .then((documentos) => {
+      this.fetchDocuments();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   render() {
     return (
       <div className="main-container">
@@ -182,9 +206,20 @@ export default class Editor extends Component {
             <LateralMenu 
               items={this.state.items} 
               onFileSelected={this.onFileSelected}
+              onClickDelete={this.deleteItem}
             />
           </div>
           <div className="column-m" >
+            <div>
+            <Button 
+              color="primary" 
+              variant="contained"
+              className="button-save"
+              onClick={this.saveItem}
+              >
+              Save
+            </Button>
+            </div>
             <TextEditor 
             handleChaneText={this.handleChangeText}
             />
