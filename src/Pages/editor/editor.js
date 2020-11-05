@@ -45,10 +45,10 @@ export default class Editor extends Component {
       return i;
     });
 
-    
-    this.handleChangeText(items[indexItem].lines);
-    document.getElementById('title-document').value = items[indexItem].nombre;
-    this.setState({items, item: items[indexItem]});
+    this.setState({items, item: items[indexItem]}, () => {
+      this.handleChangeText(items[indexItem].lines);
+      document.getElementById('title-document').value = items[indexItem].nombre;
+    });
   }
 
   handleChangeText(lines){
@@ -56,6 +56,11 @@ export default class Editor extends Component {
       nombre: "",
       lines,
     };
+    const { item } = this.state;
+    if (item.id !== undefined){
+      item.lines = lines;
+      itemToSave = item;
+    }
 
     this.setState({elements : [], item: itemToSave}, 
       () => {
@@ -223,6 +228,7 @@ export default class Editor extends Component {
   }
 
   newDocument(){
+    this.fetchDocuments();
     document.getElementById('title-document').value = '';
     this.setState({item: { lines : []}});
   }
