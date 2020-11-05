@@ -27,3 +27,8 @@ En la raiz del proyecto :
 
 En el directorio ./api : 
 ### `npm run start`
+
+
+### Ejemplo : 
+![Captura de pantalla](https://raw.githubusercontent.com/agustinjacob49/text-editor-formatted/main/src/assets/screenshot.png)
+
