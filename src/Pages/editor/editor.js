@@ -173,9 +173,7 @@ export default class Editor extends Component {
     })
     .then((res) => res.json())
     .then((documentos) => {
-      if(documentos.message !== 'Parece que no existe ese documento'){
-        this.fetchDocuments();
-      }
+      this.fetchDocuments();
     })
     .catch((err) => {
       console.log(err);
