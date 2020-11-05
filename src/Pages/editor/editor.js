@@ -23,6 +23,7 @@ export default class Editor extends Component {
     this.deleteItem = this.deleteItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.fetchDocuments = this.fetchDocuments.bind(this);
+    this.updateItem = this.updateItem.bind(this);
   }
 
   componentDidMount() {
@@ -43,13 +44,14 @@ export default class Editor extends Component {
       return i;
     });
 
+    
     this.handleChangeText(items[indexItem].lines);
-    this.setState({items});
+    this.setState({items, item: items[indexItem]});
   }
 
   handleChangeText(lines){
     let itemToSave = {
-      nombre: "Testing",
+      nombre: "",
       lines,
     };
 
@@ -181,6 +183,9 @@ export default class Editor extends Component {
   }
 
   saveItem(){
+    const { item } = this.state;
+    let itemToSave = item;
+    itemToSave.nombre = document.getElementById('title-document').value;
     fetch(`/api/documents/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -195,6 +200,9 @@ export default class Editor extends Component {
     });
   }
 
+  updateItem(id){
+
+  }
   render() {
     return (
       <div className="main-container">
@@ -209,6 +217,7 @@ export default class Editor extends Component {
           </div>
           <div className="column-m" >
             <div>
+            <input type="text"  id="title-document" name="name" className="text-box" placeholder="Title"/>
             <Button 
               color="primary" 
               variant="contained"
@@ -220,6 +229,7 @@ export default class Editor extends Component {
             </div>
             <TextEditor 
             handleChaneText={this.handleChangeText}
+            lines={this.state.item.lines}
             />
           </div>
           <div className="column-m column-right" >

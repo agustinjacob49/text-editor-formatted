@@ -118,6 +118,12 @@ pre {
 }
 
 .button-save {
-    margin-left: 76% !important;
-    margin-bottom: 12px !important;
+    margin-top: 2% !important;
+    margin-left: 6% !important;
+    margin-bottom: 2% !important;
+}
+
+.text-box{
+    width: 70%;
+    height: 40px;
 }

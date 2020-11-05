@@ -8,9 +8,21 @@ export default class TextEditor extends Component {
     super(props);
     this.state = {
         text: '',
+        lines: [],
+        contentUnformatted: '',
         openText: false,
     };
     this.onKeyPress = this.onKeyPress.bind(this);
+  }
+
+  componentWillReceiveProps(){
+    const { lines } = this.props;
+    if (lines !== undefined){
+      let contentUnformatted = '';
+      lines.forEach( (l) => ( contentUnformatted += l + '\n'));
+      this.setState({contentUnformatted});
+      document.getElementById('text-area-component').value = contentUnformatted;
+    }
   }
 
   onKeyPress(event){
@@ -22,12 +34,11 @@ export default class TextEditor extends Component {
 
 
   render() {
-    const {} = this.props;
     return (
         <textarea 
             id="text-area-component"
             className="text-editor-area"
-            onKeyPress={this.onKeyPress} >
+            onKeyPress={this.onKeyPress}>
         </textarea>
     );
   }
