@@ -17,6 +17,8 @@
     height: 100%;
     background: #dbdbdb;
     border: 1px solid #ccc!important;
+    overflow-y: scroll !important;
+    height: 100% !important;
 }
 
 .column-m {
@@ -28,6 +30,8 @@
 }
 .column-right {
     background: #f2f2f2 !important;
+    overflow-y: scroll !important;
+    height: 100% !important;
 }  
 .row{
     height: 100%;

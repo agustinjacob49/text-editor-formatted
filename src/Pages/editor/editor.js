@@ -46,6 +46,7 @@ export default class Editor extends Component {
 
     
     this.handleChangeText(items[indexItem].lines);
+    document.getElementById('title-document').value = items[indexItem].nombre;
     this.setState({items, item: items[indexItem]});
   }
 
@@ -184,12 +185,32 @@ export default class Editor extends Component {
 
   saveItem(){
     const { item } = this.state;
-    let itemToSave = item;
-    itemToSave.nombre = document.getElementById('title-document').value;
-    fetch(`/api/documents/`, {
-      method: 'POST',
+    if(item.id !== undefined){
+      this.updateItem(item);
+    } else {
+      let itemToSave = item;
+      itemToSave.nombre = document.getElementById('title-document').value;
+      fetch(`/api/documents/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.state.item)
+      })
+      .then((res) => res.json())
+      .then((documentos) => {
+        this.fetchDocuments();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+
+  updateItem(item){
+    item.nombre = document.getElementById('title-document').value;
+    fetch(`/api/documents/${item.id}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.item)
+      body: JSON.stringify(item)
     })
     .then((res) => res.json())
     .then((documentos) => {
@@ -198,10 +219,6 @@ export default class Editor extends Component {
     .catch((err) => {
       console.log(err);
     });
-  }
-
-  updateItem(id){
-
   }
   render() {
     return (
